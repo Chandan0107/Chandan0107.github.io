@@ -16,9 +16,11 @@
   });
   function draw() {
     ctx.clearRect(0,0,width,height);
-    const radius = Math.min(220,Math.max(115,width*.145));
-    const cx = width > 1050 ? width*.91 : width*.83;
-    const cy = height*.52;
+    // Balance two accretion flows across the screen margins.
+    for (const side of [0,1]) {
+    const radius = Math.min(180,Math.max(95,width*.12));
+    const cx = width * (side ? .93 : .07);
+    const cy = height * (side ? .65 : .32);
     const tilt = -.48, c = Math.cos(tilt), s = Math.sin(tilt);
     function project(x,y,z=0) {
       const px = x, py = y*.32-z;
@@ -97,7 +99,8 @@
         ctx.fillStyle=glow;ctx.fillRect(x-4,y-4,8,8);
       }
     }
-    // A few distant drifting points balance the composition on the opposite margin.
+    }
+    // Distant points connect both sides of the composition.
     for(let i=0;i<28;i++) {
       const x=(Math.sin(i*71.3)*.5+.5)*width*.22;
       const y=((i/28+time*.003)%1)*height;
