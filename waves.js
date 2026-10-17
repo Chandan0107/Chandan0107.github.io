@@ -79,7 +79,7 @@
     cancelAnimationFrame(frame);
     frame = 0;
     button.hidden = false;
-    button.textContent = paused ? 'Play background' : 'Pause background';
+    button.textContent = paused ? 'Play waves' : 'Pause waves';
     button.setAttribute('aria-pressed', String(!paused));
     if (visible && !paused && !document.hidden) {
       last = performance.now();
