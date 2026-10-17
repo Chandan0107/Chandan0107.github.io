@@ -25,3 +25,11 @@ Paper: https://doi.org/10.1109/TCI.2021.3055982
 cs.png: Fig. 1 · Field prediction from sparse measurements
 Source: https://www.ee.iitm.ac.in/uday/pub/2020-josaa-fmap.pdf
 Paper: https://doi.org/10.1364/JOSAA.388136
+
+## Conference records
+
+- Author publication listing: https://www.ee.iitm.ac.in/uday/pub.html
+- EuCAP 2021: https://doi.org/10.23919/EuCAP51087.2021.9411219
+- 2023 subsurface sampling contribution: https://iris.unicampania.it/handle/11591/532274
+
+This is a selected list, not a complete Scholar export. SPIE 2026 presentation was not added as a proceedings paper because its publication record was not verified.
