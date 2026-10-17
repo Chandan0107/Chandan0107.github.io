@@ -76,3 +76,7 @@ body{isolation:isolate;background:#f7fafd}#particle-background{position:fixed;in
 @media(max-width:650px){.software-grid{grid-template-columns:1fr}.software-card{padding:20px}}
 @media(max-width:600px){.intro .wave-background{height:210px;opacity:.4}.wave-toggle{top:215px}.profile-details{background:rgba(255,255,255,.93)}}
 @media(prefers-reduced-motion:reduce){.software-card{transition:none}.software-card:hover{transform:none}}
+
+/* Fade the surface in every direction rather than clipping a rectangular mesh. */
+.intro .wave-background{height:245px;opacity:.6;mask-image:radial-gradient(ellipse 45% 65% at 78% 48%,#000 15%,rgba(0,0,0,.65) 48%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 45% 65% at 78% 48%,#000 15%,rgba(0,0,0,.65) 48%,transparent 80%)}
+@media(max-width:600px){.intro .wave-background{height:205px;opacity:.35}}

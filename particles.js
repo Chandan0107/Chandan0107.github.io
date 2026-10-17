@@ -8,7 +8,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let paused = reduced.matches, width = 0, height = 0, frame = 0, last = 0, time = 8;
   // Artistic accretion flow and polar jets; not a relativistic ray-tracing simulation.
-  const particles = Array.from({length: 650}, (_, i) => {
+  const particles = Array.from({length: 950}, (_, i) => {
     const n = Math.sin(i * 127.1 + 311.7) * 43758.5453;
     const seed = n - Math.floor(n);
     return {angle: i * 2.399963, radius: .45 + seed * 1.65,
@@ -45,7 +45,7 @@
     const points=[];
     for(const p of particles) {
       if(p.jet)continue;
-      const r=p.radius;
+      const r=.45+((p.radius-.45-time*.008)%1.65+1.65)%1.65;
       const a=p.angle+time*.32/Math.pow(r,1.5);
       const [x,y]=project(Math.cos(a)*r,Math.sin(a)*r,Math.sin(a*3+time*.2)*.025);
       const warm=Math.max(0,1-(r-.45)/1.65);
@@ -60,6 +60,13 @@
       ctx.strokeStyle=`rgba(${color},${.18+p.warm*.30})`;ctx.lineWidth=p.p.size;ctx.stroke();
     }
     points.filter(p=>p.depth<0).forEach(paint);
+    // Soft lensed-disc-inspired arch, drawn behind the central silhouette.
+    for(let layer=0;layer<7;layer++) {
+      ctx.beginPath();
+      ctx.ellipse(cx,cy-radius*.035,radius*(.34+layer*.012),radius*(.43+layer*.009),tilt,Math.PI,Math.PI*2);
+      ctx.strokeStyle=`rgba(220,165,94,${.11-layer*.012})`;
+      ctx.lineWidth=2;ctx.stroke();
+    }
     // Dark central silhouette, with a soft photon-ring-inspired rim.
     const rim=ctx.createRadialGradient(cx,cy,radius*.21,cx,cy,radius*.33);
     rim.addColorStop(0,'rgba(23,36,57,.85)');rim.addColorStop(.7,'rgba(36,50,74,.87)');
@@ -68,6 +75,14 @@
     points.filter(p=>p.depth>=0).forEach(paint);
     // Opposing jets spread gradually away from the rotation axis.
     for(const sign of [-1,1]) {
+      const [ex,ey]=project(0,0,sign*2.5);
+      const beam=ctx.createLinearGradient(cx,cy,ex,ey);
+      beam.addColorStop(0,'rgba(75,157,199,.12)');
+      beam.addColorStop(.45,'rgba(75,157,199,.055)');
+      beam.addColorStop(1,'rgba(75,157,199,0)');
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(ex,ey);
+      ctx.strokeStyle=beam;ctx.lineWidth=radius*.065;ctx.stroke();
+
       for(let i=0;i<100;i++) {
         const seed=(i*.61803398875)%1;
         const travel=(seed+time*.045)%1;
