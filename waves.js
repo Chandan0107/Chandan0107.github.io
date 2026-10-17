@@ -26,13 +26,15 @@
       const d2 = Math.hypot(x - 1.25, z);
       const h = .42 * (Math.cos(d1 * 3.1 - time) / (1 + d1 * .28)
         + Math.cos(d2 * 3.1 - time) / (1 + d2 * .28));
+      const fade = Math.pow(Math.max(0, 1 - (x/3.5)**2), 2)
+        * Math.pow(Math.max(0, 1 - (z/3.5)**2), 2);
       const rx = x * cy - z * sy;
       const rz = x * sy + z * cy;
       const depth = rz * .83 - h * .55;
       const perspective = 10 / (11 + depth);
       return { x: width * .73 + rx * scale * perspective,
         y: height * .53 + (rz * .40 - h * .92) * scale * perspective,
-        h, depth };
+        h, depth, fade };
     }
     const grid = Array.from({length: count + 1}, (_, j) =>
       Array.from({length: count + 1}, (_, i) => point(i, j)));
@@ -41,11 +43,13 @@
       for (let i = 0; i < count; i++) {
         const points = [grid[j][i], grid[j][i+1], grid[j+1][i+1], grid[j+1][i]];
         faces.push({points, depth: points.reduce((v,p) => v+p.depth,0)/4,
-          height: points.reduce((v,p) => v+p.h,0)/4});
+          height: points.reduce((v,p) => v+p.h,0)/4,
+          fade: points.reduce((v,p) => v+p.fade,0)/4});
       }
     }
     faces.sort((a,b) => b.depth-a.depth);
     for (const face of faces) {
+      ctx.globalAlpha = face.fade;
       const light = Math.max(0, Math.min(1, (face.height + .8) / 1.6));
       ctx.beginPath();
       face.points.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
@@ -56,6 +60,7 @@
       ctx.lineWidth = .55;
       ctx.stroke();
     }
+    ctx.globalAlpha = 1;
   }
   function resize() {
     width = canvas.clientWidth;

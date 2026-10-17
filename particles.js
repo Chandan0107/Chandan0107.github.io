@@ -16,11 +16,12 @@
   });
   function draw() {
     ctx.clearRect(0,0,width,height);
-    // Balance two accretion flows across the screen margins.
-    for (const side of [0,1]) {
+    drawScattering();
+    // One accretion flow on the right; an independent scattering scene on the left.
+    {
     const radius = Math.min(180,Math.max(95,width*.12));
-    const cx = width * (side ? .93 : .07);
-    const cy = height * (side ? .65 : .32);
+    const cx = width * .93;
+    const cy = height * .65;
     const tilt = -.48, c = Math.cos(tilt), s = Math.sin(tilt);
     function project(x,y,z=0) {
       const px = x, py = y*.32-z;
@@ -107,6 +108,35 @@
       ctx.beginPath();ctx.arc(x,y,.6+(i%3)*.3,0,Math.PI*2);
       ctx.fillStyle='rgba(83,128,166,.22)';ctx.fill();
     }
+  }
+  function drawScattering() {
+    // Stylised repulsive scattering: open deflected trajectories, not orbital copies.
+    const radius=Math.min(130,Math.max(75,width*.085));
+    const cx=width*.065,cy=height*.31;
+    const halo=ctx.createRadialGradient(cx,cy,0,cx,cy,radius*1.5);
+    halo.addColorStop(0,'rgba(190,145,83,.09)');halo.addColorStop(1,'rgba(190,145,83,0)');
+    ctx.fillStyle=halo;ctx.fillRect(cx-radius*1.5,cy-radius*1.5,radius*3,radius*3);
+    function point(t,b) {
+      const x=-2.4+t*5;
+      const bend=(x+Math.sqrt(x*x+.4))*.5;
+      const y=b+Math.sign(b)*.35/(Math.abs(b)+.3)*bend;
+      return [cx+x*radius,cy+y*radius];
+    }
+    for(let i=0;i<22;i++) {
+      const b=(i-10.5)*.105;
+      ctx.beginPath();
+      for(let j=0;j<=70;j++) {
+        const [x,y]=point(j/70,b);j?ctx.lineTo(x,y):ctx.moveTo(x,y);
+      }
+      ctx.strokeStyle='rgba(69,132,164,.14)';ctx.lineWidth=.65;ctx.stroke();
+      const progress=(time*.055+i*.381966)%1;
+      const [x,y]=point(progress,b),[tx,ty]=point(Math.max(0,progress-.045),b);
+      ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(x,y);ctx.strokeStyle='rgba(53,134,171,.35)';ctx.lineWidth=1.1;ctx.stroke();
+      const glow=ctx.createRadialGradient(x,y,0,x,y,4);
+      glow.addColorStop(0,'rgba(67,151,185,.65)');glow.addColorStop(1,'rgba(67,151,185,0)');ctx.fillStyle=glow;ctx.fillRect(x-4,y-4,8,8);
+    }
+    ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);ctx.fillStyle='rgba(184,136,66,.6)';ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);ctx.strokeStyle='rgba(184,136,66,.17)';ctx.lineWidth=1;ctx.stroke();
   }
   function resize() {
     width=innerWidth;height=innerHeight;

@@ -115,3 +115,7 @@ body{isolation:isolate;background:#f7fafd}#particle-background{position:fixed;in
 .intro .wave-background{height:340px;opacity:.9;mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.6) 66%,#000 100%);-webkit-mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.6) 66%,#000 100%)}
 .intro .bio{background:#fff;position:relative;z-index:1}.profile-details{background:linear-gradient(to right,#fffffff5 65%,#ffffffa0)}
 @media(max-width:600px){.intro .wave-background{height:260px;opacity:.55}}
+
+/* Fade the mesh itself and its canvas perimeter, retaining the original wave shape. */
+.intro .wave-background{mask-image:radial-gradient(ellipse 52% 68% at 76% 50%,#000 18%,rgba(0,0,0,.8) 48%,transparent 83%);-webkit-mask-image:radial-gradient(ellipse 52% 68% at 76% 50%,#000 18%,rgba(0,0,0,.8) 48%,transparent 83%)}
+#software .software-card details{margin-top:12px}#software .repository-stats{display:none}
