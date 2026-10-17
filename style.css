@@ -61,3 +61,9 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:22px 0 36px;f
 @keyframes orbital-field{0%{transform:perspective(450px) rotateX(35deg) rotateZ(0deg) scale(.9)}50%{transform:perspective(450px) rotateX(60deg) rotateZ(180deg) scale(1.12)}100%{transform:perspective(450px) rotateX(35deg) rotateZ(360deg) scale(.9)}}
 @media(max-width:600px){.conference-row{grid-template-columns:1fr;gap:8px;padding:18px}.conference-year{font-size:20px}.publication-tabs{gap:20px}.publication-tabs button{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.publication-row .paper-thumbnail::before,.publication-row .paper-thumbnail::after{animation:none}.conference-row{transition:none;transform:none!important}}
+
+/* One continuous, decorative particle-detector scene behind the whole page. */
+body{isolation:isolate;background:#f7fafd}#particle-background{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}.page{position:relative;background:rgba(255,255,255,.88);box-shadow:0 0 65px 45px rgba(255,255,255,.7)}
+#particle-toggle{position:fixed;right:16px;bottom:14px;z-index:5;border:1px solid #d8e2eb;border-radius:20px;padding:8px 13px;background:#ffffffed;color:#4f6479;font:11px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}#particle-toggle[hidden]{display:none}#particle-toggle:focus-visible{outline:2px solid #426f96;outline-offset:3px}
+.publication-field,.gallery-motion{display:none!important}.publication-gallery::before{background:none}.paper-thumbnail::before,.paper-thumbnail::after{animation:none!important}.intro .bio{background:transparent}
+@media(max-width:600px){#particle-background{opacity:.6}.page{background:rgba(255,255,255,.87)}}

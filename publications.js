@@ -31,7 +31,7 @@
   const tabs = [...gallery.querySelectorAll('[role="tab"]')];
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const canvas = gallery.querySelector('.publication-field');
-  const ctx = canvas.getContext('2d');
+  const ctx = null; // Section drawing replaced by the shared full-screen background.
   let paused = preference.matches, visible = false, topic = 'all', kind = 'journal';
   let width = 0, height = 0, frame = 0, last = 0, time = 0;
   function render() {
