@@ -19,7 +19,7 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:22px 0 36px;f
 .profile-links a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#515d70;font-weight:600}
 .profile-links a:hover{text-decoration:underline}.profile-links svg{height:20px;width:20px;fill:currentColor;flex:none}
 .portrait{position:relative;width:164px;height:164px;border-radius:50%;overflow:hidden;border:2px solid #e0e4e9;margin-top:4px;background:#e9eef3}
-.portrait img{position:absolute;width:160%;height:auto;max-width:none;left:-52%;top:-24%}
+.portrait img{position:absolute;width:125%;height:auto;max-width:none;left:-29%;top:-10%}
 .intro .bio{max-width:none;font-size:20px;line-height:1.65;margin-top:28px}.intro .bio p{margin:0}
 @media(max-width:600px){.intro{padding-top:30px}.profile-header{grid-template-columns:minmax(0,1fr) 100px;gap:16px;padding-bottom:28px}.profile-details h1{font-size:32px;margin-bottom:16px}.position{font-size:16px;line-height:1.5}.portrait{width:100px;height:100px}.intro .profile-links{gap:18px;font-size:16px;margin-top:24px}.profile-links svg{width:17px;height:17px}.intro .bio{font-size:18px;margin-top:24px}}
 @media(max-width:380px){.profile-header{grid-template-columns:minmax(0,1fr) 80px;gap:10px}.portrait{width:80px;height:80px}.profile-details h1{font-size:29px}.intro .profile-links{gap:12px;font-size:15px}}
