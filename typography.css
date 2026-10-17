@@ -1,0 +1,42 @@
+/* A single readable serif system, matching the opening profile. */
+:root{--reading-font:Georgia,"Times New Roman",serif;--ink:#293343;--muted:#526173;--link:#285a76}
+body{font-family:var(--reading-font);font-size:18px;line-height:1.75;color:var(--ink)}
+button,summary{font-family:var(--reading-font)}
+#research{font-family:var(--reading-font)}
+#research h2{font-size:29px;font-weight:600;letter-spacing:-.4px;color:#293343}
+#research>p{font-size:19px;line-height:1.85;color:#343e4d}
+#research .current-work-title{font-size:21px;color:#293343}
+#research .current-work{font-size:18px;line-height:1.8;color:#343e4d}
+#publications.publication-gallery,#software.software-showcase{font-family:var(--reading-font);color:#293343}
+#publications.publication-gallery h2,#software.software-showcase h2{font-family:var(--reading-font);font-size:29px;font-weight:600;letter-spacing:-.4px;line-height:1.3;color:#293343}
+#publications .section-heading>a,#software .section-heading>a{font-family:var(--reading-font);font-size:14px;color:#285a76}
+#publications .publication-tabs button{font-family:var(--reading-font);font-size:17px;color:#526173}
+#publications .publication-tabs button[aria-selected="true"]{color:#264d68}
+#publications .publication-tabs span{font-family:var(--reading-font);font-size:13px;color:#39566c;background:#e0ebf2}
+#publications .publication-filters button{font-family:var(--reading-font);font-size:13px;line-height:1.5;color:#3d596d;padding:6px 10px}
+#publications .publication-filters button[aria-pressed="true"]{background:#436b7a;border-color:#436b7a;color:#fff}
+#publications .publication-count{font-size:14px;color:#526173}
+#publications .publication-info h3,#publications .conference-row h3{font-size:17px;line-height:1.55}
+#publications .publication-info h3 a,#publications .conference-row h3 a{font-family:var(--reading-font);font-size:17px;line-height:1.55;font-weight:600;color:#293343}
+#publications .publication-info p,#publications .conference-row p{font-size:14px;line-height:1.65;color:#526173}
+#publications .paper-topic{font-size:12px;line-height:1.5;letter-spacing:.25px;color:#455e72;text-transform:none}
+#publications .publication-row figcaption{font-size:12px;line-height:1.6;color:#526173}
+#publications .publication-links{gap:12px}
+#publications .publication-links a,#publications .conference-link{font-family:var(--reading-font);font-size:14px;color:#285a76}
+#publications .conference-year{font-family:var(--reading-font);font-size:20px;color:#3d617b}
+#publications .conference-row .conference-award{color:#73551e;font-size:13px}
+#publications .enlarge-hint{font-family:var(--reading-font);font-size:11px;color:#36536a;background:#fffffff2}
+#software .software-intro{font-size:17px;line-height:1.7;color:#526173}
+#software .software-card h3,#software .software-card h3 a{font-family:var(--reading-font);font-size:18px;line-height:1.45;color:#293343}
+#software .software-card>p:not(.software-topics){font-family:var(--reading-font);font-size:15px;line-height:1.75;color:#435365;min-height:0}
+#software .software-card .language,#software .software-card .language.python{font-family:var(--reading-font);font-size:12px;color:#455e72}
+#software .software-card summary{font-family:var(--reading-font);font-size:14px;color:#285a76}
+#software .software-card details p{font-size:14px;line-height:1.75;color:#526173}
+#software .software-actions a,#software .software-actions a:last-child{font-family:var(--reading-font);font-size:13px;color:#285a76}
+#software .repo-stat{font-family:var(--reading-font);font-size:11px;letter-spacing:0;color:#3e566b;background:#e4edf3}
+#software .repo-stat strong{color:#315866;background:#cde3e5}
+#publications .panel-particle-toggle,#software .panel-particle-toggle{font-family:var(--reading-font);font-size:12px;color:#455e72}
+#publications .publication-row,#publications .conference-row,#software .software-card{background:linear-gradient(145deg,#fff,#f3f8fb)}
+.figure-dialog,.figure-dialog p,.figure-close,footer{font-family:var(--reading-font)}
+.figure-dialog p{font-size:15px}footer{font-size:14px;color:#526173}
+@media(max-width:600px){body{font-size:17px}#research>p{font-size:18px}#research .current-work{font-size:17px}#publications.publication-gallery h2,#software.software-showcase h2{font-size:27px}}
