@@ -29,3 +29,8 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:22px 0 36px;f
 .wave-background{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.8;mask-image:linear-gradient(to right,transparent 5%,rgba(0,0,0,.12) 45%,#000 100%);-webkit-mask-image:linear-gradient(to right,transparent 5%,rgba(0,0,0,.12) 45%,#000 100%)}
 .wave-toggle{position:absolute;right:0;bottom:8px;border:0;padding:3px 5px;background:#fff;color:#687786;font:11px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}
 .wave-toggle:hover{text-decoration:underline}.wave-toggle:focus-visible{outline:2px solid var(--link);outline-offset:2px}.wave-toggle[hidden]{display:none}
+
+/* A projected interference surface, softened beneath readable profile copy. */
+.wave-background{opacity:1;mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.6) 66%,#000 100%);-webkit-mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.6) 66%,#000 100%)}
+.intro .bio{background:rgba(255,255,255,.76)}
+@media(max-width:600px){.wave-background{opacity:.65}}

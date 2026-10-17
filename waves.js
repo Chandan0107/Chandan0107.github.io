@@ -12,18 +12,49 @@
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
-    // Two coherent sources: intersecting circular wavefronts, purely illustrative.
-    const spacing = 43;
-    const sources = [[width * .77, height * .2], [width * 1.05, height * .72]];
-    const reach = Math.hypot(width, height) * 1.4;
-    for (const [x, y] of sources) {
-      for (let r = phase % spacing + 1; r < reach; r += spacing) {
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(76, 112, 145, 0.13)';
-        ctx.lineWidth = .8;
-        ctx.stroke();
+    // Illustrative height field of two damped waves, projected into 3D.
+    // This is a visualisation of superposition, not a measured reconstruction.
+    const time = phase * .7;
+    const yaw = -.5 + Math.sin(time * .13) * .14;
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    const scale = Math.min(width * .125, height * .19);
+    const count = width < 600 ? 28 : 40;
+    function point(i, j) {
+      const x = (i / count - .5) * 7;
+      const z = (j / count - .5) * 7;
+      const d1 = Math.hypot(x + 1.25, z);
+      const d2 = Math.hypot(x - 1.25, z);
+      const h = .42 * (Math.cos(d1 * 3.1 - time) / (1 + d1 * .28)
+        + Math.cos(d2 * 3.1 - time) / (1 + d2 * .28));
+      const rx = x * cy - z * sy;
+      const rz = x * sy + z * cy;
+      const depth = rz * .83 - h * .55;
+      const perspective = 10 / (11 + depth);
+      return { x: width * .73 + rx * scale * perspective,
+        y: height * .53 + (rz * .40 - h * .92) * scale * perspective,
+        h, depth };
+    }
+    const grid = Array.from({length: count + 1}, (_, j) =>
+      Array.from({length: count + 1}, (_, i) => point(i, j)));
+    const faces = [];
+    for (let j = 0; j < count; j++) {
+      for (let i = 0; i < count; i++) {
+        const points = [grid[j][i], grid[j][i+1], grid[j+1][i+1], grid[j+1][i]];
+        faces.push({points, depth: points.reduce((v,p) => v+p.depth,0)/4,
+          height: points.reduce((v,p) => v+p.h,0)/4});
       }
+    }
+    faces.sort((a,b) => b.depth-a.depth);
+    for (const face of faces) {
+      const light = Math.max(0, Math.min(1, (face.height + .8) / 1.6));
+      ctx.beginPath();
+      face.points.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
+      ctx.closePath();
+      ctx.fillStyle = `rgba(${Math.round(110+light*45)},${Math.round(155+light*35)},210,${.07+light*.14})`;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(57,112,161,${.16+light*.22})`;
+      ctx.lineWidth = .55;
+      ctx.stroke();
     }
   }
   function resize() {
@@ -37,7 +68,7 @@
   }
   function tick(now) {
     frame = 0;
-    if (now - last >= 50) {
+    if (now - last >= 33) {
       phase += Math.min(now - last, 100) * .005;
       last = now;
       draw();
