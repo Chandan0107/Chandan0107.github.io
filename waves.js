@@ -17,14 +17,14 @@
     const time = phase * .7;
     const yaw = -.48 + Math.sin(time * .08) * .06;
     const cy = Math.cos(yaw), sy = Math.sin(yaw);
-    const scale = Math.min(width * .105, height * .18);
+    const scale = Math.min(width * .145, height * .27);
     const count = width < 600 ? 28 : 40;
     function point(i, j) {
       const x = (i / count - .5) * 7;
       const z = (j / count - .5) * 7;
       const envelope = Math.exp(-.15 * (x*x + z*z));
-      const h = .65 * Math.sin(x * 1.7 - time * .65)
-        * Math.cos(z * 1.1 + time * .3) * envelope;
+      const h = .65 * Math.sin(x * 1.7 - time * .42)
+        * Math.cos(z * 1.1 + time * .2) * envelope;
       const fade = Math.pow(Math.max(0, 1 - Math.pow(x/3.5, 2)), 1.5)
         * Math.pow(Math.max(0, 1 - Math.pow(z/3.5, 2)), 1.5);
       const rx = x * cy - z * sy;
@@ -73,7 +73,7 @@
   function tick(now) {
     frame = 0;
     if (now - last >= 33) {
-      phase += Math.min(now - last, 100) * .005;
+      phase += Math.min(now - last, 100) * .0018;
       last = now;
       draw();
     }
