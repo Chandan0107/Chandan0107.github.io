@@ -13,9 +13,9 @@
         const p=points[i];
         for(let j=i+1;j<points.length;j++){
           const q=points[j],d=Math.hypot(p.x-q.x,p.y-q.y);
-          if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(101,177,197,${(1-d/100)*.13})`;ctx.lineWidth=.6;ctx.stroke();}
+          if(d<100){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(68,127,156,${(1-d/100)*.13})`;ctx.lineWidth=.6;ctx.stroke();}
         }
-        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(146,206,218,.55)';ctx.fill();
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(65,130,155,.42)';ctx.fill();
       }
     }
     function resize(){w=canvas.clientWidth;h=canvas.clientHeight;if(!w||!h)return;const d=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(w*d);canvas.height=Math.round(h*d);ctx.setTransform(d,0,0,d,0,0);draw();}

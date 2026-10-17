@@ -17,16 +17,15 @@
     const time = phase * .7;
     const yaw = -.48 + Math.sin(time * .08) * .06;
     const cy = Math.cos(yaw), sy = Math.sin(yaw);
-    const scale = Math.min(width * .145, height * .27);
-    const count = width < 600 ? 28 : 40;
+    const scale = Math.min(width * .14, height * .24);
+    const count = width < 600 ? 24 : 34;
     function point(i, j) {
       const x = (i / count - .5) * 7;
       const z = (j / count - .5) * 7;
-      const envelope = Math.exp(-.15 * (x*x + z*z));
-      const h = .65 * Math.sin(x * 1.7 - time * .42)
-        * Math.cos(z * 1.1 + time * .2) * envelope;
-      const fade = Math.pow(Math.max(0, 1 - Math.pow(x/3.5, 2)), 1.5)
-        * Math.pow(Math.max(0, 1 - Math.pow(z/3.5, 2)), 1.5);
+      const envelope = Math.exp(-.12 * (x*x + z*z));
+      const h = .48 * Math.sin(x * 1.15 - time * .48 + z * .32) * envelope;
+      const fade = Math.pow(Math.max(0, 1 - Math.pow(x/3.5, 2)), 2)
+        * Math.pow(Math.max(0, 1 - Math.pow(z/3.5, 2)), 2);
       const rx = x * cy - z * sy;
       const rz = x * sy + z * cy;
       const depth = rz * .83 - h * .55;
@@ -53,9 +52,9 @@
       ctx.beginPath();
       face.points.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
       ctx.closePath();
-      ctx.fillStyle = `rgba(${Math.round(110+light*45)},${Math.round(155+light*35)},210,${.07+light*.14})`;
+      ctx.fillStyle = `rgba(${Math.round(110+light*45)},${Math.round(155+light*35)},210,${.025+light*.065})`;
       ctx.fill();
-      ctx.strokeStyle = `rgba(57,112,161,${.16+light*.22})`;
+      ctx.strokeStyle = `rgba(57,112,161,${.10+light*.18})`;
       ctx.lineWidth = .45;
       ctx.stroke();
     }
@@ -73,7 +72,7 @@
   function tick(now) {
     frame = 0;
     if (now - last >= 33) {
-      phase += Math.min(now - last, 100) * .0018;
+      phase += Math.min(now - last, 100) * .0015;
       last = now;
       draw();
     }
