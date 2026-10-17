@@ -15,6 +15,7 @@
         const repo = await response.json();
         if (![repo.stargazers_count,repo.forks_count,repo.open_issues_count].every(Number.isInteger)) return;
         const stats = card.querySelector('.repository-stats');
+        stats.replaceChildren();
         function badge(label,value,extra='') {
           const badge=document.createElement('span');badge.className=`repo-stat ${extra}`;
           const key=document.createElement('span');key.textContent=label;
