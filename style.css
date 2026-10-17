@@ -34,3 +34,5 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:22px 0 36px;f
 .wave-background{opacity:1;mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.6) 66%,#000 100%);-webkit-mask-image:linear-gradient(to right,transparent 10%,rgba(0,0,0,.08) 38%,rgba(0,0,0,.6) 66%,#000 100%)}
 .intro .bio{background:rgba(255,255,255,.76)}
 @media(max-width:600px){.wave-background{opacity:.65}}
+
+.current-work-title{margin:26px 0 12px;font-weight:600}.current-work{padding-left:21px;margin:0}.current-work li{padding-left:4px;margin-bottom:12px}.current-work li:last-child{margin-bottom:0}.current-work strong{font-weight:600}

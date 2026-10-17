@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Chandan Bhat, Research Associate at the University of Cambridge. Computational imaging, inverse problems, and scientific computing.">
-<title>Chandan Bhat</title><link rel="stylesheet" href="style.css?v=surface-1">
+<title>Chandan Bhat</title><link rel="stylesheet" href="style.css?v=research-overview-1">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -25,11 +25,18 @@
 </div>
 <div class="bio"><p>I’m a Research Associate at the Cavendish Laboratory, University of Cambridge. My research focuses on computational imaging, Bayesian inference, and inverse problems. I develop methods to reconstruct spatial and wavelength-dependent structure from sparse optical-interferometric measurements, with particular attention to uncertainty in the recovered images. Previously, I worked on electromagnetic field prediction, radar imaging, and sensor selection. I completed my M.S. and Ph.D. in Electrical Engineering at IIT Madras in 2023.</p></div>
 </section>
-<section id="research"><h2>Research</h2><div class="research-list">
-<article><h3>Optical-interferometric imaging</h3><p>Optical interferometers provide information about a source at a limited set of spatial frequencies. I develop polychromatic models that infer spatial structure and spectral variation together, using physical forward models, Bayesian priors, and variational inference.</p><p class="detail">Current work at Cambridge. Python, JAX, and NIFTy.</p></article>
-<article><h3>Sampling and electromagnetic inverse problems</h3><p>My doctoral work studied field prediction and inverse imaging from incomplete electromagnetic measurements. One part of this work asks which sensor positions and frequencies are most useful for subsurface radar imaging.</p><p class="detail"><a href="https://github.com/Chandan0107/subsurface-radar-sensor-optimization">Radar-imaging implementation</a> · <a href="https://doi.org/10.1109/LGRS.2022.3158021">Total-field imaging paper</a></p></article>
-<article><h3>Machine learning for physical models</h3><p>I co-developed a tandem neural-network method for multiband antenna design, coupling an inverse network to a CNN surrogate of electromagnetic simulations. I am also developing LLM-assisted workflows to inspect reconstruction diagnostics and support the choice of subsequent experiments.</p><p class="detail">The LLM-assisted reconstruction work is ongoing.</p></article>
-</div></section>
+<section id="research">
+<h2>Research interests</h2>
+<p>My research focuses on recovering physical information from incomplete measurements. I combine physics-based models, Bayesian inference, and machine learning to develop imaging and sensing methods.</p>
+<p>I currently work on optical-interferometric imaging at Cambridge. My broader interests include electromagnetic inverse problems, measurement optimisation, and AI-assisted scientific workflows.</p>
+<h3 class="current-work-title">Current work</h3>
+<ul class="current-work">
+<li><strong>Polychromatic image reconstruction:</strong> developing methods to jointly recover spatial structure and its variation with wavelength from optical-interferometric measurements.</li>
+<li><strong>Uncertainty and reliability:</strong> using posterior samples, fit diagnostics, and controlled simulations to assess which image features are supported by the data.</li>
+<li><strong>Scientific software:</strong> building reproducible Python/JAX/NIFTy workflows for forward modelling, inference, and reconstruction analysis.</li>
+<li><strong>AI-assisted reconstruction:</strong> developing workflows that use reconstructed images, uncertainty, and quantitative diagnostics to support subsequent modelling decisions.</li>
+</ul>
+</section>
 <section id="publications"><div class="section-heading"><h2>Selected publications</h2><a href="https://scholar.google.com/citations?user=UGaXlaEAAAAJ">Scholar profile</a></div><ol class="publications">
     <li><h3>Subsurface Radar Imaging by Optimizing Sensor Locations in Spatio-Spectral Domains</h3><p>C. Bhat, M. A. Maisto, U. K. Khankhoje, and R. Solimene · IEEE Transactions on Geoscience and Remote Sensing · 2023</p><a href="https://github.com/Chandan0107/subsurface-radar-sensor-optimization">Code and paper</a></li>
     <li><h3>Tandem Neural Network Based Design of Multiband Antennas</h3><p>A. Gupta, E. A. Karahan, C. Bhat, K. Sengupta, and U. K. Khankhoje · IEEE Transactions on Antennas and Propagation · 2023</p></li>
