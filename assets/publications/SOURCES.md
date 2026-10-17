@@ -32,4 +32,4 @@ Paper: https://doi.org/10.1364/JOSAA.388136
 - EuCAP 2021: https://doi.org/10.23919/EuCAP51087.2021.9411219
 - 2023 subsurface sampling contribution: https://iris.unicampania.it/handle/11591/532274
 
-This is a selected list, not a complete Scholar export. SPIE 2026 presentation was not added as a proceedings paper because its publication record was not verified.
+This is a selected list, not a complete Scholar export. SPIE 2026 is listed as an oral presentation, with proceedings awaiting publication according to the user’s local publication list. No DOI or paper number is asserted because a matching public publication record was not verified. Source: /Users/shastra/Desktop/Jobs/IIT Dharwad/Presentednotpublished.pdf.

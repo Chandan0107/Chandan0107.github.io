@@ -89,7 +89,7 @@
       card.hidden=topic!=='all' && topic!==card.dataset.topic;
       if(matchesKind && !card.hidden)count++;
     });
-    status.textContent=`${count} ${kind==='journal'?'journal':'conference'} ${count===1?'paper':'papers'}${kind==='journal'?' · Select a figure to explore':''}`;
+    status.textContent = kind === 'journal' ? `${count} journal ${count === 1 ? 'paper' : 'papers'} · Select a figure to explore` : `${count} conference ${count === 1 ? 'contribution' : 'contributions'}`;
     filters.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.topic===topic)));
     tabs.forEach(tab=>{const selected=tab.dataset.kind===kind;tab.setAttribute('aria-selected',String(selected));tab.tabIndex=selected?0:-1;});
   }
