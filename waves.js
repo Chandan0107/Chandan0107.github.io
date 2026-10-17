@@ -12,55 +12,53 @@
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
-    // Illustrative height field of two damped waves, projected into 3D.
-    // This is a visualisation of superposition, not a measured reconstruction.
+    if (!width || !height) return;
+    // An extended wire surface avoids the visible edges of filled polygon tiles.
     const time = phase * .7;
-    const yaw = -.5 + Math.sin(time * .13) * .14;
+    const yaw = -.5 + Math.sin(time * .13) * .10;
     const cy = Math.cos(yaw), sy = Math.sin(yaw);
     const scale = Math.min(width * .125, height * .19);
-    const count = width < 600 ? 28 : 40;
-    function point(i, j) {
-      const x = (i / count - .5) * 7;
-      const z = (j / count - .5) * 7;
-      const d1 = Math.hypot(x + 1.25, z);
-      const d2 = Math.hypot(x - 1.25, z);
-      const h = .42 * (Math.cos(d1 * 3.1 - time) / (1 + d1 * .28)
-        + Math.cos(d2 * 3.1 - time) / (1 + d2 * .28));
-      const fade = Math.pow(Math.max(0, 1 - (x/3.5)**2), 2)
-        * Math.pow(Math.max(0, 1 - (z/3.5)**2), 2);
-      const rx = x * cy - z * sy;
-      const rz = x * sy + z * cy;
-      const depth = rz * .83 - h * .55;
-      const perspective = 10 / (11 + depth);
-      return { x: width * .73 + rx * scale * perspective,
-        y: height * .53 + (rz * .40 - h * .92) * scale * perspective,
-        h, depth, fade };
+    function point(x,z) {
+      const d1 = Math.hypot(x + 1.25,z), d2 = Math.hypot(x - 1.25,z);
+      const h = .42 * (Math.cos(d1*3.1-time)/(1+d1*.28)
+        + Math.cos(d2*3.1-time)/(1+d2*.28));
+      const rx=x*cy-z*sy, rz=x*sy+z*cy;
+      return [width*.73+rx*scale, height*.5+(rz*.4-h*.92)*scale];
     }
-    const grid = Array.from({length: count + 1}, (_, j) =>
-      Array.from({length: count + 1}, (_, i) => point(i, j)));
-    const faces = [];
-    for (let j = 0; j < count; j++) {
-      for (let i = 0; i < count; i++) {
-        const points = [grid[j][i], grid[j][i+1], grid[j+1][i+1], grid[j+1][i]];
-        faces.push({points, depth: points.reduce((v,p) => v+p.depth,0)/4,
-          height: points.reduce((v,p) => v+p.h,0)/4,
-          fade: points.reduce((v,p) => v+p.fade,0)/4});
+    ctx.lineWidth=.65;
+    // Draw continuous lines in both directions; extend past the viewport.
+    for (let axis=0;axis<2;axis++) {
+      for(let row=-28;row<=28;row++) {
+        const fixed=row*.25;
+        const alpha=.24*Math.exp(-Math.pow(fixed/5.8,4));
+        ctx.strokeStyle=`rgba(57,112,161,${alpha})`;
+        ctx.beginPath();
+        for(let j=0;j<=110;j++) {
+          const variable=-9+j*18/110;
+          const [x,y]=axis?point(fixed,variable):point(variable,fixed);
+          j?ctx.lineTo(x,y):ctx.moveTo(x,y);
+        }
+        ctx.stroke();
       }
     }
-    faces.sort((a,b) => b.depth-a.depth);
-    for (const face of faces) {
-      ctx.globalAlpha = face.fade;
-      const light = Math.max(0, Math.min(1, (face.height + .8) / 1.6));
-      ctx.beginPath();
-      face.points.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
-      ctx.closePath();
-      ctx.fillStyle = `rgba(${Math.round(110+light*45)},${Math.round(155+light*35)},210,${.07+light*.14})`;
-      ctx.fill();
-      ctx.strokeStyle = `rgba(57,112,161,${.16+light*.22})`;
-      ctx.lineWidth = .55;
-      ctx.stroke();
-    }
-    ctx.globalAlpha = 1;
+    // Multiply the actual drawing by smooth masks at all four canvas edges.
+    // End pixels are transparent even when the surface extends beyond the canvas.
+    ctx.save();
+    ctx.globalCompositeOperation='destination-in';
+    const horizontal=ctx.createLinearGradient(0,0,width,0);
+    horizontal.addColorStop(0,'rgba(0,0,0,0)');
+    horizontal.addColorStop(.30,'rgba(0,0,0,0)');
+    horizontal.addColorStop(.60,'rgba(0,0,0,.7)');
+    horizontal.addColorStop(.78,'rgba(0,0,0,1)');
+    horizontal.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=horizontal;ctx.fillRect(0,0,width,height);
+    const vertical=ctx.createLinearGradient(0,0,0,height);
+    vertical.addColorStop(0,'rgba(0,0,0,0)');
+    vertical.addColorStop(.22,'rgba(0,0,0,1)');
+    vertical.addColorStop(.65,'rgba(0,0,0,1)');
+    vertical.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=vertical;ctx.fillRect(0,0,width,height);
+    ctx.restore();
   }
   function resize() {
     width = canvas.clientWidth;

@@ -119,3 +119,7 @@ body{isolation:isolate;background:#f7fafd}#particle-background{position:fixed;in
 /* Fade the mesh itself and its canvas perimeter, retaining the original wave shape. */
 .intro .wave-background{mask-image:radial-gradient(ellipse 52% 68% at 76% 50%,#000 18%,rgba(0,0,0,.8) 48%,transparent 83%);-webkit-mask-image:radial-gradient(ellipse 52% 68% at 76% 50%,#000 18%,rgba(0,0,0,.8) 48%,transparent 83%)}
 #software .software-card details{margin-top:12px}#software .repository-stats{display:none}
+
+/* The renderer now feathers its actual pixel edges; no rectangular surface patch. */
+.intro .wave-background{mask-image:none;-webkit-mask-image:none;border:0;background:transparent}
+.profile-details{background:linear-gradient(to right,#fff 25%,rgba(255,255,255,.85) 60%,rgba(255,255,255,0) 100%)}
